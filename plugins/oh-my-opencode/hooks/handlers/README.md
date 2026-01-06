@@ -18,6 +18,22 @@ Auto-injects README.md files from current directory hierarchy.
 **Events:** PreToolUse, PostToolUse, SessionEnd
 **Description:** Finds README.md files up the directory tree and injects them once per session when files are read.
 
+#### rules-injector.js
+Conditionally injects rules from .claude/rules/ directory.
+
+**Events:** UserPromptSubmit, SessionEnd
+**Description:** Scans for rule files and injects applicable ones based on file patterns and conditions.
+**Supported Patterns:**
+- typescript-strict.md → TypeScript files
+- python-style.md → Python files
+- security-checks.md → Always applies
+
+#### compaction-context-injector.js
+Preserves critical context during message compaction.
+
+**Events:** PreCompact
+**Description:** Injects structured prompt to guide summarization, preserving user requests, goals, work completed, and constraints.
+
 ### Output Control Hooks
 
 #### tool-output-truncator.js
@@ -60,11 +76,30 @@ Detects special keywords and triggers behaviors.
 - `ultrawork`: Activates maximum precision mode
 - `search <topic>`: Suggests parallel search agents
 
+#### auto-slash-command.js
+Detects and executes slash command patterns.
+
+**Events:** UserPromptSubmit, SessionEnd
+**Description:** Automatically detects /command patterns and processes them as commands.
+**Format:** `/command [args]`
+
 #### empty-message-sanitizer.js
 Sanitizes empty or whitespace-only messages.
 
 **Events:** UserPromptSubmit
 **Description:** Blocks submission of empty messages with error message.
+
+### Environment Hooks
+
+#### non-interactive-env.js
+Adapts behavior for CI/headless environments.
+
+**Events:** PreToolUse, UserPromptSubmit
+**Description:** Detects non-interactive mode (CI=true, TERM=dumb) and disables interactive features.
+**Modifications:**
+- Disables confirmations
+- Disables interactive prompts
+- Adds non-interactive mode notice
 
 ## Hook Format
 
@@ -98,6 +133,15 @@ module.exports.UserPromptSubmit = async function UserPromptSubmit({ sessionID, a
 };
 
 /**
+ * PreCompact hook handler
+ * Executes before message compaction
+ */
+module.exports.PreCompact = async function PreCompact({ sessionID, context }) {
+  // Hook logic here
+  // Can inject context preservation prompts
+};
+
+/**
  * SessionEnd hook handler
  * Cleanup when session ends
  */
@@ -124,6 +168,12 @@ Hooks are registered in `hooks.json`:
       "config": {
         "enabled": true
       }
+    }
+  ],
+  "PreCompact": [
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/compaction-context-injector.js",
+      "config": {}
     }
   ]
 }
@@ -171,6 +221,17 @@ cp -r plugins/oh-my-opencode ~/.claude/plugins/
 # Restart Claude Desktop
 # Test each hook by triggering its event
 ```
+
+## Summary
+
+**Total Hooks Implemented:** 11
+**Total Lines of Code:** ~1,096
+
+**By Category:**
+- Context Injection: 4 hooks
+- Output Control: 2 hooks
+- Workflow Enhancement: 4 hooks
+- Environment: 1 hook
 
 ## See Also
 

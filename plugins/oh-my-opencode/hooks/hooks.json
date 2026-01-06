@@ -7,6 +7,10 @@
     {
       "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/directory-readme-injector.js",
       "config": {}
+    },
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/non-interactive-env.js",
+      "config": {}
     }
   ],
   "PostToolUse": [
@@ -47,9 +51,31 @@
       "config": {
         "enabled": true
       }
+    },
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/auto-slash-command.js",
+      "config": {
+        "enabled": true
+      }
+    },
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/rules-injector.js",
+      "config": {
+        "enabled": true
+      }
+    },
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/non-interactive-env.js",
+      "config": {}
     }
   ],
   "Stop": [],
+  "PreCompact": [
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/compaction-context-injector.js",
+      "config": {}
+    }
+  ],
   "SessionEnd": [
     {
       "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/directory-agents-injector.js",
@@ -65,6 +91,14 @@
     },
     {
       "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/keyword-detector.js",
+      "config": {}
+    },
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/auto-slash-command.js",
+      "config": {}
+    },
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/rules-injector.js",
       "config": {}
     }
   ]
