@@ -28,6 +28,29 @@ Complete guide for installing and using the oh-my-opencode Claude Code plugin.
 
 ### 5-Minute Setup
 
+#### One-Click Installation (Easiest)
+
+**For Claude Code:**
+```bash
+cd plugins/oh-my-opencode
+./install-claude.sh
+```
+
+**For CodeBuddy:**
+```bash
+cd plugins/oh-my-opencode
+./install-codebuddy.sh
+```
+
+The installation script will:
+- Create the plugins directory if needed
+- Copy all plugin files
+- Display next steps and documentation links
+
+Then restart Claude Desktop or CodeBuddy.
+
+#### Manual Installation
+
 ```bash
 # 1. Copy plugin to Claude plugins directory
 mkdir -p ~/.claude/plugins
@@ -44,23 +67,53 @@ cp -r plugins/oh-my-opencode ~/.claude/plugins/
 
 ## Installation Methods
 
-### Method 1: Manual Installation (Recommended)
+### Method 1: One-Click Installation (Recommended)
+
+**For Claude Code:**
+```bash
+# Clone repository
+git clone https://github.com/code-yeongyu/oh-my-opencode.git
+cd oh-my-opencode/plugins/oh-my-opencode
+
+# Run installation script
+./install-claude.sh
+
+# Restart Claude Desktop
+```
+
+**For CodeBuddy:**
+```bash
+# Clone repository
+git clone https://github.com/code-yeongyu/oh-my-opencode.git
+cd oh-my-opencode/plugins/oh-my-opencode
+
+# Run installation script
+./install-codebuddy.sh
+
+# Restart CodeBuddy
+```
+
+### Method 2: Manual Installation
 
 ```bash
 # Clone repository
 git clone https://github.com/code-yeongyu/oh-my-opencode.git
 cd oh-my-opencode
 
-# Copy plugin to Claude plugins directory
+# For Claude Code:
 mkdir -p ~/.claude/plugins
 cp -r plugins/oh-my-opencode ~/.claude/plugins/
 
+# For CodeBuddy:
+mkdir -p ~/.codebuddy-plugin
+cp -r plugins/oh-my-opencode ~/.codebuddy-plugin/
+
 # Verify installation
-ls ~/.claude/plugins/oh-my-opencode/
+ls ~/.claude/plugins/oh-my-opencode/  # or ~/.codebuddy-plugin/oh-my-opencode/
 # Should see: README.md, .claude-plugin/, agents/, commands/, hooks/, skills/
 ```
 
-### Method 2: Symlink (Development)
+### Method 3: Symlink (Development)
 
 For active development, use symlinks:
 
@@ -71,9 +124,13 @@ cd oh-my-opencode
 bun install
 bun run build
 
-# Create symlink
+# Create symlink for Claude Code
 mkdir -p ~/.claude/plugins
 ln -s "$(pwd)/plugins/oh-my-opencode" ~/.claude/plugins/oh-my-opencode
+
+# Or for CodeBuddy
+mkdir -p ~/.codebuddy-plugin
+ln -s "$(pwd)/plugins/oh-my-opencode" ~/.codebuddy-plugin/oh-my-opencode
 
 # Changes to plugin files will be reflected immediately
 ```

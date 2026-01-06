@@ -102,31 +102,64 @@ Lifecycle hooks for context management, error recovery, and workflow enhancement
 - **context7** - Enhanced context management
 - **grep_app** - Advanced grep capabilities
 
-## 📖 Usage
+## 📖 Installation & Usage
 
-### In Claude Desktop
-This plugin follows Claude Code plugin structure. Install via:
+### Quick Installation
+
+#### One-Click Install (Recommended)
+
+**For Claude Code:**
+```bash
+cd plugins/oh-my-opencode
+./install-claude.sh
+```
+
+**For CodeBuddy:**
+```bash
+cd plugins/oh-my-opencode
+./install-codebuddy.sh
+```
+
+Then restart Claude Desktop or CodeBuddy.
+
+#### Manual Install
+
+**For Claude Code:**
 ```bash
 # Copy to Claude plugins directory
+mkdir -p ~/.claude/plugins
 cp -r plugins/oh-my-opencode ~/.claude/plugins/
 
-# Or use the Claude CLI (if available)
-claude plugin install ./plugins/oh-my-opencode
+# Restart Claude Desktop
+```
+
+**For CodeBuddy:**
+```bash
+# Copy to CodeBuddy plugins directory
+mkdir -p ~/.codebuddy-plugin
+cp -r plugins/oh-my-opencode ~/.codebuddy-plugin/
+
+# Restart CodeBuddy
 ```
 
 ### Using Agents
 ```
-Use @oh-my-opencode:sisyphus for orchestration
-Use @oh-my-opencode:oracle for architecture review
-Use @oh-my-opencode:librarian for documentation research
+@oh-my-opencode:sisyphus - Primary orchestrator
+@oh-my-opencode:oracle - Architecture review
+@oh-my-opencode:librarian - Documentation research
+@oh-my-opencode:explore - Fast codebase search
+@oh-my-opencode:frontend-ui-ux-engineer - UI development
+@oh-my-opencode:document-writer - Technical writing
+@oh-my-opencode:multimodal-looker - Visual analysis
 ```
 
 ### Using Commands
-Commands are available as slash commands in Claude:
+Commands are available as slash commands:
 ```
 /oh-my-opencode:lsp-hover <file> <line> <character>
 /oh-my-opencode:ast-grep-search <pattern> [options]
 /oh-my-opencode:session-search <query>
+/oh-my-opencode:background-task agent=<name> prompt="<text>"
 ```
 
 ## 🏗️ Structure
