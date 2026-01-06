@@ -1,0 +1,23 @@
+{
+  "name": "oh-my-opencode",
+  "version": "2.13.2",
+  "description": "Complete oh-my-opencode toolkit extracted as Claude Code plugin - 7 AI agents, 11 LSP tools, AST-Grep, session management, 22 lifecycle hooks",
+  "author": "oh-my-opencode contributors",
+  "homepage": "https://github.com/code-yeongyu/oh-my-opencode",
+  "license": "MIT",
+  "keywords": [
+    "agents",
+    "lsp",
+    "ast-grep",
+    "hooks",
+    "orchestration",
+    "code-tools"
+  ],
+  "components": {
+    "agents": 7,
+    "commands": 26,
+    "skills": 1,
+    "hooks": 22,
+    "mcpServers": 2
+  }
+}
