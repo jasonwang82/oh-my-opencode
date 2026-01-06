@@ -1,7 +1,71 @@
 {
-  "PreToolUse": [],
-  "PostToolUse": [],
-  "UserPromptSubmit": [],
+  "PreToolUse": [
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/directory-agents-injector.js",
+      "config": {}
+    },
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/directory-readme-injector.js",
+      "config": {}
+    }
+  ],
+  "PostToolUse": [
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/directory-agents-injector.js",
+      "config": {}
+    },
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/directory-readme-injector.js",
+      "config": {}
+    },
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/tool-output-truncator.js",
+      "config": {
+        "enabled": true
+      }
+    },
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/comment-checker.js",
+      "config": {
+        "enabled": true
+      }
+    }
+  ],
+  "UserPromptSubmit": [
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/empty-message-sanitizer.js",
+      "config": {}
+    },
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/agent-usage-reminder.js",
+      "config": {
+        "enabled": true
+      }
+    },
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/keyword-detector.js",
+      "config": {
+        "enabled": true
+      }
+    }
+  ],
   "Stop": [],
-  "onSummarize": []
+  "SessionEnd": [
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/directory-agents-injector.js",
+      "config": {}
+    },
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/directory-readme-injector.js",
+      "config": {}
+    },
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/agent-usage-reminder.js",
+      "config": {}
+    },
+    {
+      "handler": "${CLAUDE_PLUGIN_ROOT}/hooks/handlers/keyword-detector.js",
+      "config": {}
+    }
+  ]
 }
